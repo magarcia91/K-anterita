@@ -1,0 +1,29 @@
+.category-option{
+  background-color: thistle;
+  border-color: darkturquoise;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  border-radius: 30%;
+  text-align: center;
+  margin: 4%;
+  font-size: 15px;
+  font-style: italic;
+  font-family: font-family: 'Brush Script MT', cursive;
+  font-weight: bold;
+  padding: 4rem !important;
+  display: inline-flex;
+  color: #000;
+  height: 8em;
+  width: 16em;
+}
+
+.category-option:hover{
+  cursor:pointer;
+  background-color: cornflowerblue;
+}
+
+.newcategory-option{
+  border-color: black !important;
+  background-color: steelblue !important;
+}
