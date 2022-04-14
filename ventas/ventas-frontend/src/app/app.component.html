@@ -1,0 +1,118 @@
+<div style="text-align: center;">
+    <h1>
+      Bienvenido al Sistema de {{title}}
+    </h1>
+</div>
+<hr>
+<div class="container bg-faded">
+  <div class="card-bod">
+    <div class="card-header">
+      <h3>Listado de clientes</h3>
+  </div>
+  <form [formGroup]="clienteForm" class="form-row">
+    <table class="table table-hover">
+      <thead>
+          <tr class="text-center">
+              <th>Nombres</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let cliente of clientes" class="text-center">
+              <td>{{cliente.nombre}}</td>
+              <td><button (click)="eliminarCliente(cliente)" type="submit" class="btn btn-danger">Eliminar</button></td>
+          </tr>
+      </tbody>
+  </table>
+  <button (click)="agregarCliente();" type="submit" class="btn btn-primary">Crear</button>
+  <div class="col">
+    <label for="nombre">Nombre Cliente</label>
+    <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+  </div>
+</form>
+<br/>
+
+<form [formGroup]="ventaForm" class="form-row">
+ <div class="col">
+      <label for="clientes">Cliente</label>
+        <select  class="custom-select" formControlName="id"  (change)="recuperarClienteSelected()">
+          <option [value]="cliente.id" *ngFor="let cliente of clientes">{{cliente.nombre}}</option>
+        </select>
+    <hr>
+<div class="container bg-faded">
+    <form [formGroup]="ventaForm" class="form-row">
+      <div class="col">
+        <label for="producto">Producto</label>
+          <select  class="custom-select" formControlName="id"  (change)="recuperarProductoSelected()">
+            <option [value]="productItem.id" *ngFor="let productItem of productList">{{productItem.descripcion}}</option>
+          </select>
+      </div>
+      <div class="col">
+        <label for="id">Precio</label>
+        <input type="text" class="form-control" placeholder="Precio" formControlName="precio" readonly>
+      </div>
+      <div class="col">
+        <label for="id">Cantidad</label>
+        <input type="text" class="form-control" placeholder="Cantidad" formControlName="cantidad" (keyup)="calcularProductoItemTotal()">
+      </div>
+      <div class="col">
+        <label for="id">Stock</label>
+        <input type="text" class="form-control" placeholder="Stock" formControlName="cantidad" readonly>
+      </div>
+      <div class="col">
+        <label for="id">Total</label>
+        <input type="text" class="form-control" placeholder="Total" readonly value="{{productItemTotal}}">
+      </div>
+      <button (click)="agregarProducto()" class="btn btn-primary">Añadir producto</button>
+    </form>
+</div>
+<hr>
+<div class="container bg-faded">
+    <div class="card">
+        <div class="card-header">
+            <h3>Productos</h3>
+        </div>
+        <div class="card-bod">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th>Id</th>
+                        <th>Descripcion</th>
+                        <th>Cantidad</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let producto of productos" class="text-center">
+                        <td>{{producto.id}}</td>
+                        <td>{{producto.descripcion}}</td>
+                        <td>{{producto.cantidad}}</td>
+                        <td>{{producto.cantidad}}</td>
+                        <td>{{producto.precio}}</td>
+                        <td>{{producto.cantidad * producto.precio}}</td>
+                        <td><button (click)="eliminarProducto(producto)" type="submit" class="btn btn-danger">Eliminar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="d-flex" >
+    <div class="pull-right col-md-4">
+      <table class="table table-bordered table-hover" id="tab_logic_total">
+        <tbody>
+          <tr>
+            <th class="text-center">Total</th>
+            <td class="text-center"><input type="number" name='total' id="total" value="{{productoTotal}}" placeholder='0.00' class="form-control" readonly/></td>
+            <td><button (click)="guardarVenta()" type="submit" class="btn btn-primary">Guardar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
